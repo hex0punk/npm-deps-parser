@@ -20,7 +20,7 @@ def get_root_deps(paths):
     depths = []
     for d in paths:
         libs = d.split(">")
-        root = libs[0] 
+        root = libs[0]
         depths.append(len(libs))
         if root not in deps:
             deps.append(root)
@@ -30,7 +30,7 @@ def parse(stdin=False, file_path="", cve_only=False, show_depth=False, atlassian
     if stdin:
         npm_json = json.load(sys.stdin)
         process_json(npm_json, cve_only=cve_only, show_depth=show_depth, atlassian_format=atlassian_format)
-    elif file_path is not "":
+    elif file_path != "":
         with open(file_path) as json_file:
             npm_json = json.load(json_file)
         process_json(npm_json, cve_only=cve_only, show_depth=show_depth, atlassian_format=atlassian_format)
@@ -66,7 +66,7 @@ def process_json(npm_json, cve_only=False, show_depth=False, atlassian_format=Fa
                     print(f"| {cve} | {vuln['module_name']} | {deps_str} |" 
                         +f" {vuln['title']} | ? | {vuln['url']} |")
             continue
-        if not cve_only and len(cves) is 0:
+        if not cve_only and len(cves) == 0:
             if show_depth:
                 print(f"| N/A | {vuln['module_name']} | {deps_str} | {depth} |" +
                     f" {vuln['title']} | N/A | {vuln['url']} |")
